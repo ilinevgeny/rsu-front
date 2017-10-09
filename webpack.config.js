@@ -1,10 +1,11 @@
 global.Promise         = require('bluebird');
 
-const mode = process.env.NODE_ENV.replace(/[^A-Z]/ig, '');
+const mode = process.env.NODE_ENV && process.env.NODE_ENV.replace(/[^A-Z]/ig, '');
 
 const webpack            = require('webpack');
 const ExtractTextPlugin  = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin     = require( 'webpack-manifest-plugin');
 
 const publicPath         = 'http://localhost:8050/public/assets';
 const cssName            = mode === 'production' ? 'styles-[hash].css' : 'styles.css';
@@ -20,6 +21,9 @@ const plugins = [
     new ExtractTextPlugin(cssName),
     new webpack.LoaderOptionsPlugin({
         debug: true
+    }),
+    new ManifestPlugin({
+        fileName: 'manifest.json'
     })
 ];
 
@@ -50,11 +54,17 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
             {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
+                test: /\.styl$/,
+                loader: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: "css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/"
+                })
             },
             { test: /\.gif$/, loader: 'url-loader?limit=10000&mimetype=image/gif' },
             { test: /\.jpg$/, loader: 'url-loader?limit=10000&mimetype=image/jpg' },
