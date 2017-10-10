@@ -1,4 +1,5 @@
 import express  from 'express';
+import compress from 'compression';
 import morgan   from 'morgan';
 import React    from 'react';
 import ReactDom from 'react-dom/server';
@@ -12,18 +13,19 @@ const PORT = process.env.PORT || (mode === 'production' ? 3333 : 3003);
 
 const Template = new Layout(manifest, mode === 'production');
 
-// Настраиваем путь для статичных файлов:
-app.use(express.static('public'));
-
 // @todo для нашего конкретного случая вытаскивать IP из заголовков.
 // @todo отправлять логи в файл.
 app.use(morgan('combined'));
 
-app.use((req, res) => {
-    const componentHTML = ReactDom.renderToString(<App />);
+// Сжимаем файлы
+app.use(compress());
 
-    return res.end(Template.render(componentHTML));
-});
+// Настраиваем путь для статичных файлов:
+app.use(express.static('public', {
+    maxage: '1Y'
+}));
+
+app.use( (req, res) => res.end(Template.render( ReactDom.renderToString(<App />) )) );
 
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);

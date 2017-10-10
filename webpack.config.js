@@ -62,8 +62,8 @@ module.exports = {
             {
                 test: /\.styl$/,
                 loader: ExtractTextPlugin.extract({
-                        fallback: "style-loader",
-                        use: "css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/"
+                    fallback: "style-loader",
+                    use: "css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/"
                 })
             },
             { test: /\.gif$/, loader: 'url-loader?limit=10000&mimetype=image/gif' },
