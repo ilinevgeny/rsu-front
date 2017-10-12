@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PageComponent from './App/PageComponent';
 import PropTypes from 'prop-types';
 
 
@@ -12,7 +13,7 @@ const defaultProps = {
     initialName: 'Аноним'
 };
 
-class App extends Component {
+class App extends PageComponent {
     constructor(props) {
         super(props);
 

@@ -1,27 +1,40 @@
 const DEV_WEBPACK_SERVER = 'http://localhost:8050';
 
-export default class Layout {
-    constructor(manifest, isProd) {
+class Layout {
+    isProd = false;
+    title = '';
+
+    setManifest(manifest) {
         this.manifest = manifest;
-        this.isProd   = isProd
     }
+
+    setProdMode() {
+        this.isProd = true;
+    }
+
     getCssFile() {
         return this.isProd ?
             `/assets/${this.manifest['main.css']}` :
             `${DEV_WEBPACK_SERVER}/public/assets/styles.css`;
     }
+
     getJsFile() {
         return this.isProd ?
             `/assets/${this.manifest['main.js']}` :
             `${DEV_WEBPACK_SERVER}/public/assets/bundle.js`;
     }
+
+    setTitle(title) {
+        this.title = title;
+    }
+
     render(componentHtml) {
         return `<!DOCTYPE html>
         <html>
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Hello Galaxy</title>
+                <title>${this.title}</title>
                 <link rel="stylesheet" href="${this.getCssFile()}">
             </head>
             <body>
@@ -31,3 +44,7 @@ export default class Layout {
         </html>`
     }
 }
+
+const instance = new Layout();
+
+export default instance;
