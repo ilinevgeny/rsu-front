@@ -1,11 +1,18 @@
+import {toJSON} from 'transit-immutable-js';
+
 const DEV_WEBPACK_SERVER = 'http://localhost:8050';
 
 class Layout {
     isProd = false;
     title = '';
+    store = null;
 
     setManifest(manifest) {
         this.manifest = manifest;
+    }
+
+    setStore(store) {
+        this.store = store;
     }
 
     setProdMode() {
@@ -29,6 +36,7 @@ class Layout {
     }
 
     render(componentHtml) {
+        const state = JSON.stringify(toJSON(this.store.getState()));
         return `<!DOCTYPE html>
         <html>
             <head>
@@ -38,6 +46,9 @@ class Layout {
                 <link rel="stylesheet" href="${this.getCssFile()}">
             </head>
             <body>
+                <script type="application/javascript">
+                    window.__INITIAL_STATE__ = ${state};
+                </script>
                 <div id="react-view">${componentHtml}</div>
                 <script type="application/javascript" src="${this.getJsFile()}"></script>
             </body>
