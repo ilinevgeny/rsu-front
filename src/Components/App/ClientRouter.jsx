@@ -20,10 +20,7 @@ export default () => {
     return (
         <Provider store={store}>
             <BrowserRouter >
-                <div>
-                <NavBar/>
                 {renderRoutes(routes)}
-                </div>
             </BrowserRouter>
         </Provider>
     )

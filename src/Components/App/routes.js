@@ -1,4 +1,4 @@
-import Index from '../App';
+import Home from '../Pages/Home';
 import Test from '../Test';
 import Error from './Error';
 
@@ -6,7 +6,7 @@ export default  [
     {
         path: '/',
         exact: true,
-        component: Index,
+        component: Home,
         title: 'Главная страница',
     },
     {

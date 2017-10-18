@@ -28,10 +28,7 @@ router.get('*', (req, res) => {
     let content = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>
-                <div>
-                    <NavBar/>
-                    {renderRoutes(routes)}
-                </div>
+                {renderRoutes(routes)}
             </StaticRouter>
         </Provider>
     );

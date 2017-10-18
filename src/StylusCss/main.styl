@@ -1,0 +1,123 @@
+@import "pallete.styl"
+
+body
+  font-family "Century Gothic", sans-serif
+  font-size 14px
+  margin 0
+
+.main_wrap
+  display flex
+  margin 40px auto 0
+  width 1124px
+  justify-content space-between
+
+.left-aside,
+.right-aside
+  width 220px
+  min-width 220px
+
+.logo_wrap
+  margin-bottom 32px
+
+.content
+  flex-grow 1
+  box-sizing border-box
+
+.-content-padding
+  padding-left 14px
+  padding-right 24px
+  box-sizing border-box
+
+.title
+  margin-top 0
+  color $color-orange
+  font-size 24px
+
+.-gothic-text
+  line-height 20px
+  color $color-blue
+
+.-color_grey
+  color $color-grey
+
+.info
+  width 100
+
+.invite-form
+  margin-top 11px
+  width 100%
+
+.gallery
+  position relative
+  width 100%
+  margin-top 36px
+  padding-right 10px
+  display flex
+  justify-content space-between
+  flex-wrap wrap
+  box-sizing: border-box
+
+.gallery-item
+  width 188px
+  padding 0 14px 8px
+  box-sizing border-box
+
+.gallery-item_img
+  width 160px
+  height 160px
+  background-color $color-green
+  margin-bottom 12px
+
+.gallery-item_text
+  height 36px
+  padding-bottom 16px
+  text-align center
+
+.input
+  border none
+  border-bottom 1px solid $color-grey
+  font-style italic
+  margin-top 1px
+  padding 10px 0
+  box-sizing border-box
+  display block
+  width 100%
+  outline none
+  &.-light-focus:focus
+    border-bottom: 1px solid $color-blue
+
+.button
+  display inline-block
+  border none
+  color $color-white
+  background-color $color-green
+  padding 8px 16px 9px
+  cursor pointer
+
+.submit-wrap
+  width 100%
+  text-align center
+  margin-top 30px
+
+.search-form
+  position relative
+  width 400px
+  margin 40px 0
+
+.search-submit
+  position absolute
+  display block
+  width 36px
+  height 36px
+  top 0
+  right 0
+  border none
+  background-image url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAASCAYAAAC5DOVpAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUlJREFUeNqs1M9HRFEYxvF+iUvRPiJaRYkSrSKiRSKKFIkWKUVa9Ae0GrVKkdumxShSm0m0ilbthtQq5g+IVilGadT35IlX7jlnVC8f5t6Zec655z3n1qZpWvNfVZdxL8EarvGBd1xiEfWhsIYf1+04R6eui2jEkMxhFI+xmSUmaBvN6EM3WnCEfhR8M7RhywrawCpezHdPmMEpBjAfC5tWQC6wLEuo6LfBMDerG5QDYW6tSmZNvWFvWrdYJb4BbZjrXA9aA0FdaMNdLGxPXdrxdMttkQN9zsXCjnGGcW3YQQU0YQS36NWsytWcgCls6U9XeMUzLtCBez2qG2wsdgLciOua5bBCKwrJq4sFzfgEk3qazDDbjGLG/ZIG2zSB35s586DHyi3DimnKISZ+G+ZqFwsmMP1LmKt9zOJBLwHvmlVbefmqTwEGAPaLQaU8fqjNAAAAAElFTkSuQmCC')
+  background-repeat no-repeat
+  cursor pointer
+  background-color transparent
+  background-position-y center
+  background-position-x right
+  outline none
+
+@import "mobile.styl"
