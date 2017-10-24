@@ -4,7 +4,7 @@ export default class RightAside extends Component {
     render() {
         return (
             <aside className="right-aside">
-                <div className="-gothic-text">
+                <div className="invite-button">
                     Пригласить РСУ к себе в дом
                 </div>
                 <form className="invite-form">

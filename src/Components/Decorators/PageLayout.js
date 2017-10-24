@@ -5,9 +5,7 @@ export default (LeftAside, PageComponent, RightAside) => class PageLayout extend
         return (
             <article className="main_wrap">
                 <LeftAside/>
-                <section className="content">
-                    <PageComponent {...this.props} />
-                </section>
+                <PageComponent {...this.props} />
                 <RightAside/>
             </article>
         );

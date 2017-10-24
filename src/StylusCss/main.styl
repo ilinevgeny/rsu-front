@@ -8,16 +8,29 @@ body
 .main_wrap
   display flex
   margin 40px auto 0
-  width 1124px
+  width 1154px
   justify-content space-between
 
 .left-aside,
 .right-aside
-  width 220px
-  min-width 220px
+  width 240px
+  min-width 240px
+
+.left-aside
+  padding-left 40px
+  box-sizing border-box
 
 .logo_wrap
-  margin-bottom 32px
+  margin-bottom 18px
+
+.invite-button {
+  background-color: #f19821;
+  color: aliceblue;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  line-height: 40px;
+}
 
 .content
   flex-grow 1
@@ -25,7 +38,7 @@ body
 
 .-content-padding
   padding-left 14px
-  padding-right 24px
+  padding-right 14px
   box-sizing border-box
 
 .title
@@ -44,14 +57,14 @@ body
   width 100
 
 .invite-form
-  margin-top 11px
+  padding 10px 15px
   width 100%
+  box-sizing border-box
 
 .gallery
   position relative
   width 100%
   margin-top 36px
-  padding-right 10px
   display flex
   justify-content space-between
   flex-wrap wrap
@@ -82,6 +95,7 @@ body
   box-sizing border-box
   display block
   width 100%
+  font-family "Century Gothic", sans-serif
   outline none
   &.-light-focus:focus
     border-bottom: 1px solid $color-blue
@@ -92,17 +106,19 @@ body
   color $color-white
   background-color $color-green
   padding 8px 16px 9px
+  font-family "Century Gothic", sans-serif
+  font-weight bold
   cursor pointer
 
 .submit-wrap
   width 100%
-  text-align center
+  text-align right
   margin-top 30px
 
 .search-form
   position relative
   width 400px
-  margin 40px 0
+  margin 35px 0
 
 .search-submit
   position absolute
