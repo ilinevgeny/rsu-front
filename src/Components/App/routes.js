@@ -10,9 +10,9 @@ export default  [
         title: 'Главная страница',
     },
     {
-        path: '/test',
+        path: '/house/:id',
         component: Test,
-        title: 'Тестовая страница',
+        title: 'Инфо о доме',
     },
     {
         path: '*',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import PageComponent from '../../App/PageComponent';
 import PageLayout  from '../../Decorators/PageLayout';
@@ -19,10 +20,10 @@ class Home extends PageComponent {
                 </div>
                 <div className="info -content-padding -gothic-text -color_grey">Мы открываем для каждого дома отдельный расчетный счет в банке. Как будто у дома есть своя карточка. Все средства от жителей приходят на этот счет, и все платежи поставщикам уходят также с него. Средства, собранные на счет вашего дома, не могут быть направлены на нужды другого.</div>
                 <div className="gallery">
-                    <div className="gallery-item">
+                    <Link to='/house/id_of_house'><div className="gallery-item">
                         <div className="gallery-item_img" />
                         <div className="gallery-item_text -gothic-text">Московский пр-т, 57, корп. 1</div>
-                    </div>
+                    </div></Link>
                     <div className="gallery-item">
                         <div className="gallery-item_img" />
                         <div className="gallery-item_text -gothic-text">Московский пр-т, 57, корп. 1</div>

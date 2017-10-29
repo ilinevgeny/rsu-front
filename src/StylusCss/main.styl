@@ -17,20 +17,39 @@ body
   min-width 240px
 
 .left-aside
+  position relative
   padding-left 40px
   box-sizing border-box
 
 .logo_wrap
   margin-bottom 18px
 
-.invite-button {
-  background-color: #f19821;
-  color: aliceblue;
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-  line-height: 40px;
-}
+.pointer-back
+  position absolute
+  left 6px
+  top 8px
+  width 24px
+  height 22px
+  background-image url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNpi/DhDkYFIoAXEXUD8HYhrgPgmMZpYiDTcFYjXATEPlK8OxHrEaGQiQk0sEG9BMhwEiPY2IQsqgHgRELOhidcQawGuIGIG4glAnIMm/heIc4F4OiUWcEJdHYImDorcaCBez0ACQLdACIg3ArENmvg7IPYH4iMMJAJkC+SAeDs0OSKDR0DsCcTXGMgAsEjWBeJjWAy/DMRW5BoO84ElEO9CS4YwwAYNMnIAKM6KWaARyoNDkToDZWARKIj4GWgHhEAWVNLIcFAQFYCCaC6UMx9Ljl0GxIlA/ItcW5iQDAIlxS9o8lF4EgDJZdE+aJJ8gabGHpqEpSm1AJbuzbGU9bB8okupBbCca4WlWADl9ANQH1FkAazsccNSsAlB48SDGvUBKGWFAvEULLl7PrUqHFj5X4lFnCoWwEAHtC54DU1l6cRaABBgAJeCOmJB+8hSAAAAAElFTkSuQmCC')
+  &:hover
+    background-image url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAgVJREFUeNq0VT1IHEEYnW929s87T7FJlRCxCyQWNoLptbE5bOzSSIpISBFIk0ZIkBQpUsQfsLMRCSrYnJ1YHYgWWlgJgpAyEHM/u3N78+UtOcPtGcLerffg2GN2772bee99S+cfH4o0KPhyNmzwhiChXUULN3VTSvM7leahQU+++xWYZWbQA00jdnHx70Ug78q1SmBectta07ArUuK/AgMulSqhmb6z7tBeNeTeBYZ86egmH9dCftZ5L+fSFsjn0+5A/oN8JIj4sq6T5ITTz3vyUzfkd3YA8rF6g091xIXEvyDBOVcuwugV0SVUWwwnq5oPo2bSQEuKCORFxHJf9ADVIi9WQ7ON+FmJmxYFMPQ5yE9Ej1DI+AK2vn6b8U6P4MWRbVHXxPAsQiHf0MXyIx0ZtkUfgBPQ0jBbok8whpX0HbnZD/I41gOOXFUw9wXGQQXXV53d9Gy6wjk+/Vk3lW4F4KnAFPhTNHxZRIneQjWhETT4MXpxjZQ96HUnf5uMJH1GouaQe9P+AEo3XNN8BZGJTAIxkPcdlGoqdr99HeXzcITluC+ZBFoi5ZxDTxxFNyIxooXC2P6GXb7OJBADpl76No26Nn1PxA5lhMgXiLzPJNAS+eEpGvUdOkukA5+aNkuZBVoiGqNiHC+eg84U3ovALfDimUFXvmJsmzhlKOeHtAK/BRgA8i7aLbd9vBIAAAAASUVORK5CYII=')
+
+.invite-button
+  background-color $color-orange
+  border 1px solid $color-orange
+  color $color-white
+  text-align center
+  width 100%
+  font-weight bold
+  line-height 40px
+  box-sizing border-box
+  cursor pointer
+  &:hover
+    background-color $color-orange_hover
+    border 1px solid $color-orange_hover-border
+  &.-active
+    background-color $color-orange_active
+    border 1px solid $color-orange_active-border
 
 .content
   flex-grow 1
@@ -55,6 +74,7 @@ body
 
 .info
   width 100
+  text-align justify
 
 .invite-form
   padding 10px 15px
