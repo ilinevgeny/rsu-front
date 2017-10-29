@@ -34,6 +34,16 @@ body
   &:hover
     background-image url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAgVJREFUeNq0VT1IHEEYnW929s87T7FJlRCxCyQWNoLptbE5bOzSSIpISBFIk0ZIkBQpUsQfsLMRCSrYnJ1YHYgWWlgJgpAyEHM/u3N78+UtOcPtGcLerffg2GN2772bee99S+cfH4o0KPhyNmzwhiChXUULN3VTSvM7leahQU+++xWYZWbQA00jdnHx70Ug78q1SmBectta07ArUuK/AgMulSqhmb6z7tBeNeTeBYZ86egmH9dCftZ5L+fSFsjn0+5A/oN8JIj4sq6T5ITTz3vyUzfkd3YA8rF6g091xIXEvyDBOVcuwugV0SVUWwwnq5oPo2bSQEuKCORFxHJf9ADVIi9WQ7ON+FmJmxYFMPQ5yE9Ej1DI+AK2vn6b8U6P4MWRbVHXxPAsQiHf0MXyIx0ZtkUfgBPQ0jBbok8whpX0HbnZD/I41gOOXFUw9wXGQQXXV53d9Gy6wjk+/Vk3lW4F4KnAFPhTNHxZRIneQjWhETT4MXpxjZQ96HUnf5uMJH1GouaQe9P+AEo3XNN8BZGJTAIxkPcdlGoqdr99HeXzcITluC+ZBFoi5ZxDTxxFNyIxooXC2P6GXb7OJBADpl76No26Nn1PxA5lhMgXiLzPJNAS+eEpGvUdOkukA5+aNkuZBVoiGqNiHC+eg84U3ovALfDimUFXvmJsmzhlKOeHtAK/BRgA8i7aLbd9vBIAAAAASUVORK5CYII=')
 
+.header
+  display flex
+  justify-content space-between
+  margin-bottom 6px
+
+.invite-wrap
+  width 240px
+  min-width 240px
+
+
 .invite-button
   background-color $color-orange
   border 1px solid $color-orange
@@ -113,12 +123,18 @@ body
   margin-top 1px
   padding 10px 0
   box-sizing border-box
-  display block
+  display inline-block
   width 100%
   font-family "Century Gothic", sans-serif
   outline none
   &.-light-focus:focus
     border-bottom: 1px solid $color-blue
+  &.-select
+    padding 6px 0
+    font-style none;
+  &.-inline
+    width auto
+    margin-right 40px
 
 .button
   display inline-block
@@ -155,5 +171,35 @@ body
   background-position-y center
   background-position-x right
   outline none
+
+.house-info-wrap
+  display flex
+
+.house-info_text
+  padding-top 8px
+  font-weight bold
+
+.house-info_image
+  width 240px
+  height 240px
+  margin-top: 20px;
+  background-color $color-grey
+
+.house-stat
+  margin-left 40px
+
+.house-stat_notice
+  padding-top 10px
+  font-size 12px
+
+.house-stat_graph-wrap
+  display flex
+  height 100%
+
+.graph
+  width 340px
+  height 210px
+  margin-top 21px
+  background-color #dedede
 
 @import "mobile.styl"

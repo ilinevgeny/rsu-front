@@ -4,9 +4,9 @@ export default (LeftAside, PageComponent, RightAside) => class PageLayout extend
     render() {
         return (
             <article className="main_wrap">
-                <LeftAside/>
+                {LeftAside ? <LeftAside/> : ''}
                 <PageComponent {...this.props} />
-                <RightAside/>
+                {RightAside ? <RightAside/> : ''}
             </article>
         );
     }

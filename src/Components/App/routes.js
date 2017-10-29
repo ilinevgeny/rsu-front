@@ -1,5 +1,5 @@
 import Home from '../Pages/Home';
-import Test from '../Test';
+import HouseInfo from '../Pages/HouseInfo';
 import Error from './Error';
 
 export default  [
@@ -11,7 +11,7 @@ export default  [
     },
     {
         path: '/house/:id',
-        component: Test,
+        component: HouseInfo,
         title: 'Инфо о доме',
     },
     {
