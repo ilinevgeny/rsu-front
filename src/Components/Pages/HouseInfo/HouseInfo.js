@@ -2,10 +2,12 @@ import React from 'react';
 import PageComponent from '../../App/PageComponent';
 import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
-import InviteForm from '../../Partials/InviceForm'
+import InviteForm from '../../Partials/InviceForm';
+import GraphWrap from './GraphWrap';
 
 class HouseInfo extends PageComponent {
     render() {
+
         return (
             <section className="content">
                 <div className="header">
@@ -32,19 +34,13 @@ class HouseInfo extends PageComponent {
                                 <option value="2016">2016&nbsp;&nbsp;</option>
                                 <option value="2015">2015&nbsp;&nbsp;</option>
                                 <option value="2014">2014&nbsp;&nbsp;</option>
+                                <option value="2013">2013&nbsp;&nbsp;</option>
                             </select>
                         </div>
                         <div className="house-stat_notice -color_grey">
                             Поступления и расходы отобразятся за выбранный месяц
                         </div>
-                        <div className="house-stat_graph-wrap">
-                            <div className="graph" />
-                            <ul>
-                                <li>Поступления</li>
-                                <li>Расходы</li>
-                                <li>Остаток на счете</li>
-                            </ul>
-                        </div>
+                        <GraphWrap />
                     </div>
                 </div>
             </section>

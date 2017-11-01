@@ -82,6 +82,15 @@ body
 .-color_grey
   color $color-grey
 
+.-color_green
+  color $color-green
+
+.-color_orange
+  color $color-orange
+
+.-color_blue
+  color $color-blue
+
 .info
   width 100
   text-align justify
@@ -187,6 +196,7 @@ body
 
 .house-stat
   margin-left 40px
+  flex-grow 1
 
 .house-stat_notice
   padding-top 10px
@@ -194,12 +204,41 @@ body
 
 .house-stat_graph-wrap
   display flex
-  height 100%
+
 
 .graph
   width 340px
   height 210px
   margin-top 21px
   background-color #dedede
+
+.graph-legend
+  position relative
+  list-style-type none
+  flex-grow 1
+  margin 0
+  padding 6px 10px 24px
+  &:after
+    content attr(data-update)
+    position absolute
+    bottom 0
+    left 21px
+    font-size 12px
+    color $color-grey
+
+
+.graph-legend_item
+  display flex
+  padding 10px
+
+.graph-legend_item-title
+  flex-grow 1;
+  padding-left 8px
+
+.graph-legend_item-sum
+  font-weight bold
+  font-size 16px
+
+@import "controls.styl"
 
 @import "mobile.styl"

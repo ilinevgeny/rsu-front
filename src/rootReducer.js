@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
 import users from './Reducers/users';
+import houseInfo from './Reducers/houseInfo';
 
 export default combineReducers({
-    users
+    users,
+    houseInfo
 })
