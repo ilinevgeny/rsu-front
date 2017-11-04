@@ -24,7 +24,6 @@ class GraphWrap extends Component {
     }
 
     toggle = (name) => (e) => {
-        console.log(name);
         const state = {};
         state[name] = !this.state[name];
         this.setState(state);

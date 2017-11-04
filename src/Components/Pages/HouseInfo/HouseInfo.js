@@ -4,6 +4,7 @@ import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
 import InviteForm from '../../Partials/InviceForm';
 import GraphWrap from './GraphWrap';
+import BillsTable from './BillsTable';
 
 class HouseInfo extends PageComponent {
     render() {
@@ -43,6 +44,7 @@ class HouseInfo extends PageComponent {
                         <GraphWrap />
                     </div>
                 </div>
+                <BillsTable billsList={[]}/>    
             </section>
         );
     }
