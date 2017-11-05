@@ -14,7 +14,7 @@ class HouseInfo extends PageComponent {
                 <div className="header">
                     <h1 className="title -content-padding">Узнайте все о состоянии счета вашего дома</h1>
                     <div className="invite-wrap">
-                        <InviteForm />
+                        <InviteForm toggleable={true} />
                     </div>
                 </div>
                 <div className="house-info-wrap">

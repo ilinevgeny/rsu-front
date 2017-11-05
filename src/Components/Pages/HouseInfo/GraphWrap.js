@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapToArr } from '../../../Utils/helper';
 import { LegendRecord } from '../../../Reducers/Entities';
+import Graph from './Graph'
 import GraphLegend from './GraphLegend';
 
 
@@ -32,7 +33,7 @@ class GraphWrap extends Component {
     render() {
         return (
             <div className="house-stat_graph-wrap">
-                <div className="graph" />
+                <Graph />
                 <GraphLegend list={this.props.legendList} toggleObj={this.state} toggle={this.toggle} modifiers={this.modifiers}/>
             </div>
         );

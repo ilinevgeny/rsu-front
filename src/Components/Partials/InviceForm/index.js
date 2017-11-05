@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Invite extends Component {
+    static propTypes = {
+        toggleable: PropTypes.bool,
+    };
+
     state = {
         open: false
     };
@@ -28,12 +33,14 @@ export default class Invite extends Component {
     }
 
     render() {
+        const modifier = `invite-form_wrap ${this.props.toggleable ? '-overflow' : ''}`;
+
         return (
             <div>
                 <div className="invite-button" onClick={this.toggle}>
                     Пригласить РСУ к себе в дом
                 </div>
-                <div className="invite-form_wrap">
+                <div className={modifier}>
                     {this.renderForm()}
                 </div>
             </div>

@@ -38,6 +38,8 @@ body
   display flex
   justify-content space-between
   margin-bottom 6px
+  position relative
+  z-index 10
 
 .invite-wrap
   width 240px
@@ -64,6 +66,7 @@ body
 .content
   flex-grow 1
   box-sizing border-box
+  position relative
 
 .-content-padding
   padding-left 14px
@@ -84,9 +87,13 @@ body
 
 .-color_green
   color $color-green
+.-background-color_green
+  background-color  $color-green
 
 .-color_orange
   color $color-orange
+.-background-color_orange
+  background-color $color-orange
 
 .-color_blue
   color $color-blue
@@ -99,6 +106,10 @@ body
   padding 10px 15px
   width 100%
   box-sizing border-box
+  background-color $background-color
+
+.invite-form_wrap.-overflow
+  height 0
 
 .gallery
   position relative
@@ -183,6 +194,8 @@ body
 
 .house-info-wrap
   display flex
+  position relative
+  z-index 1
 
 .house-info_text
   padding-top 8px
@@ -210,7 +223,7 @@ body
   width 340px
   height 210px
   margin-top 21px
-  background-color #dedede
+
 
 .graph-legend
   position relative
@@ -235,9 +248,10 @@ body
   flex-grow 1;
   padding-left 8px
 
+.-sum-font,
 .graph-legend_item-sum
   font-weight bold
-  font-size 16px
+  font-size 16px !important
 
 .bills-table_wrap
   margin-top 55px
@@ -296,8 +310,65 @@ body
   border 1px solid $color-grey
   margin-top -1px
 
+.bills-list_header
+  display flex
+  height 34px
+  background-color $color-green
+  line-height 34px
+  color $color-white
 
+.bills-list_row
+  display flex
+  height 40px
+  line-height 40px
+  border-top 1px solid $color-grey-light
+
+.bills-list_item
+  padding 0 16px
+  font-size 12px
+  &.-date
+    min-width 60px
+  &.-sum
+    min-width 140px
+    text-align right
+  &.-desc
+    flex-grow 1
+  &.-cont
+    min-width 160px
+  &.-debit:before
+    content '+ '
+  &.-credit:before
+    content '- '
+
+.diagram
+  margin 25px 30px
+  font-size 12px
+
+.diagram_item
+  display flex
+  height 40px
+  align-items center
+
+
+.diagram_item-title
+  width 200px
+  text-align right
+  padding-right 12px
+
+.diagram_item-data
+  flex-grow 1
+  display flex
+  align-items center
+  height 100%
+  border-left 1px solid $color-grey
+.diagram_item-progress-bar
+  height 25px
+
+.diagram_item-sum
+  padding-left 10px
+  white-space nowrap
 
 @import "controls.styl"
+@import "svg-graph.styl"
 
 @import "mobile.styl"
