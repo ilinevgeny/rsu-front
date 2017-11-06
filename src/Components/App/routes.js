@@ -1,6 +1,7 @@
 import Home from '../Pages/Home';
 import HouseInfo from '../Pages/HouseInfo';
 import Error from './Error';
+import { listLoader } from '../../Reducers/Requests/housesRequest'
 
 export default  [
     {
@@ -8,9 +9,24 @@ export default  [
         exact: true,
         component: Home,
         title: 'Главная страница',
+        fetchData: listLoader
     },
     {
-        path: '/house/:id',
+        path: '/?search=',
+        exact: true,
+        component: Home,
+        title: 'Главная страница',
+        fetchData: listLoader
+    },
+    {
+        path: '/?search=:search',
+        exact: true,
+        component: Home,
+        title: 'Главная страница',
+        fetchData: listLoader
+    },
+    {
+        path: '/house/:id?/:year?/:month?',
         component: HouseInfo,
         title: 'Инфо о доме',
     },

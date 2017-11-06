@@ -38,3 +38,13 @@ export function numberFormat( number, decimals, dec_point, thousands_sep ) {
 
     return km + kw + kd;
 }
+
+export function prepareParams(params) {
+    let url = params[0];
+    delete params[0];
+    for (let i in params) {
+        params[i] = params[i] ? decodeURIComponent(params[i]) : params[i];
+    }
+
+    return params;
+}

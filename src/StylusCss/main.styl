@@ -111,14 +111,27 @@ body
 .invite-form_wrap.-overflow
   height 0
 
+.gallery_wrap
+  margin-top 36px
+
 .gallery
   position relative
   width 100%
-  margin-top 36px
   display flex
   justify-content space-between
   flex-wrap wrap
   box-sizing: border-box
+  &:after
+    content: "";
+    width 188px
+
+.gallery_not-found
+  text-align center
+  font-size 16px
+  margin-top 36px
+
+.gallery_loader
+  text-align center
 
 .gallery-item
   width 188px
@@ -128,13 +141,18 @@ body
 .gallery-item_img
   width 160px
   height 160px
-  background-color $color-green
+  background-color $color-grey-light
   margin-bottom 12px
+  overflow hidden
 
 .gallery-item_text
   height 36px
   padding-bottom 16px
   text-align center
+
+.gallery-item_wrap
+  text-decoration none !important
+
 
 .input
   border none

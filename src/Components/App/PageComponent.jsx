@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 
 export default class PageComponent extends Component {
+
     constructor(props) {
         super(props);
         props.staticContext && props.staticContext.pageTitleSetter(props.route.title || '');
         this.title = props.route.title || '';
+        if (typeof document !== 'undefined') {
+            let history = require('history');
+            this.history = history.createBrowserHistory();
+        }
+    }
+
+    isBrowser() {
+        return typeof document !== 'undefined';
     }
 
     setTitle(title) {
@@ -17,7 +26,7 @@ export default class PageComponent extends Component {
 
     componentWillMount()
     {
-        if (typeof document !== 'undefined' && this.title) {
+        if (this.isBrowser() && this.title) {
             document.title = this.title;
         }
     }
