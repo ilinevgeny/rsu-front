@@ -1,10 +1,13 @@
-import {Record} from 'immutable';
-import {LOAD_HOUSES_LIST, SET_SEARCH_STRING, START, SUCCESS} from '../CONSTANTS';
+import {Record, Map} from 'immutable';
+import {LOAD_HOUSES_LIST, SET_SEARCH_STRING,
+    LOAD_HOUSE_ITEM, SET_HOUSE_ITEM,
+    START, SUCCESS} from '../CONSTANTS';
 
 const ReducerState = Record({
     list: null,
     loading: false,
     loaded: false,
+    infoDict: new Map({}),
     found: 0,
     total: 0,
     search: ''
@@ -24,6 +27,10 @@ export default (state = initialState, action = {}) => {
                 .set('found', action.payload && action.payload.found || 0)
                 .set('total', action.payload && action.payload.total || 0)
                 .set('loading', false).set('loaded', true);
+        case LOAD_HOUSE_ITEM + START:
+            return state.set('loading', true);
+        case SET_HOUSE_ITEM + SUCCESS:
+            return state.setIn(['infoDict', action.id], action.payload).set('loading', false);
     }
 
     return state

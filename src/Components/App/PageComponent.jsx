@@ -4,12 +4,13 @@ export default class PageComponent extends Component {
 
     constructor(props) {
         super(props);
-        props.staticContext && props.staticContext.pageTitleSetter(props.route.title || '');
         this.title = props.route.title || '';
-        if (typeof document !== 'undefined') {
+
+        if (this.isBrowser()) {
             let history = require('history');
             this.history = history.createBrowserHistory();
         }
+        props.staticContext && props.staticContext.pageTitleSetter( this.title );
     }
 
     isBrowser() {
@@ -18,6 +19,9 @@ export default class PageComponent extends Component {
 
     setTitle(title) {
         this.title = title;
+        if (this.isBrowser() && title) {
+            document.title = title;
+        }
     }
 
     appendTitle(title) {

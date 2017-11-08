@@ -1,14 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PageComponent from '../../App/PageComponent';
 import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
 import InviteForm from '../../Partials/InviceForm';
 import GraphWrap from './GraphWrap';
 import BillsTable from './BillsTable';
+import {houseLoader} from '../../../Reducers/Requests/housesRequest'
 
 class HouseInfo extends PageComponent {
-    render() {
+    setHouseTitle(props) {
+        if (props.info) {
+            this.setTitle(props.route.title + ' | ' + props.info.address);
+        }
+    }
 
+    componentWillMount() {
+        super.componentWillMount();
+        this.setHouseTitle(this.props);
+        if (!this.props.loading && this.props.info === null) {
+            this.props.houseLoader({id: this.props.id});
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setHouseTitle(nextProps);
+    }
+
+    render() {
+        if (this.props.info === null) {
+            return '';
+        }
         return (
             <section className="content">
                 <div className="header">
@@ -19,8 +41,8 @@ class HouseInfo extends PageComponent {
                 </div>
                 <div className="house-info-wrap">
                     <div className="house-info">
-                        <div className="house-info_text -gothic-text">Набережная, 35, корп. 4</div>
-                        <div className="house-info_image" />
+                        <div className="house-info_text -gothic-text">{this.props.info.address}</div>
+                        <div className="house-info_image"><img width='100%' src={this.props.info.img.front} /></div>
                     </div>
                     <div className="house-stat">
                         <div className="house-stat_select-bar">
@@ -50,4 +72,11 @@ class HouseInfo extends PageComponent {
     }
 }
 
-export default PageLayout(LeftAside, HouseInfo);
+export default connect(
+    (s, {match}) => ({
+            id: match.params.id,
+            info: s.houses.getIn(['infoDict', match.params.id]) || null,
+            loading: s.houses.get('loading')
+    }),
+    {houseLoader}
+)( PageLayout(LeftAside, HouseInfo) );

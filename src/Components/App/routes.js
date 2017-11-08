@@ -1,7 +1,7 @@
 import Home from '../Pages/Home';
 import HouseInfo from '../Pages/HouseInfo';
 import Error from './Error';
-import { listLoader } from '../../Reducers/Requests/housesRequest'
+import { listLoader, houseLoader } from '../../Reducers/Requests/housesRequest'
 
 export default  [
     {
@@ -29,6 +29,7 @@ export default  [
         path: '/house/:id?/:year?/:month?',
         component: HouseInfo,
         title: 'Инфо о доме',
+        fetchData: houseLoader
     },
     {
         path: '*',

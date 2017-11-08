@@ -12,9 +12,9 @@ class LeftAside extends Component {
         return (
             <aside className="left-aside">
                 <Link to='/' onClick={this._onClick}><div className="pointer-back" /></Link>
-                <div className="logo_wrap">
+                <Link to='/' onClick={this._onClick} className="logo_wrap">
                     <img className="logo" src="/img/logo.png" alt="RSU" />
-                </div>
+                </Link>
                 <div className="contacts -gothic-text">
                     <div>+7 (343) 384-00-61</div>
                     <div>info@ukliga.tu</div>
