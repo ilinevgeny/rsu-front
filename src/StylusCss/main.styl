@@ -173,6 +173,9 @@ body
   &.-inline
     width auto
     margin-right 40px
+  &.-error
+    border-bottom: 1px solid $color-red
+    color $color-red
 
 .button
   display inline-block
@@ -183,11 +186,16 @@ body
   font-family "Century Gothic", sans-serif
   font-weight bold
   cursor pointer
+  margin-left 12px
+  &:disabled
+    background-color $color-grey
 
 .submit-wrap
   width 100%
   text-align right
   margin-top 30px
+  display flex
+  justify-content flex-end
 
 .search-form
   position relative

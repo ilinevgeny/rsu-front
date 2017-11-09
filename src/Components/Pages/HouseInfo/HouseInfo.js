@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PageComponent from '../../App/PageComponent';
 import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
-import InviteForm from '../../Partials/InviceForm';
+import InviteForm from '../../Partials/InviteForm';
 import GraphWrap from './GraphWrap';
 import BillsTable from './BillsTable';
 import {houseLoader} from '../../../Reducers/Requests/housesRequest'
