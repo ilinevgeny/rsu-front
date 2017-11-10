@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {inviteRsu} from '../../../Reducers/Requests/housesRequest'
+import {hideInvitationAlert} from '../../../Reducers/AC/housesAC'
 import Loader from '../../Partials/Loader'
 
 
@@ -12,17 +13,27 @@ class Invite extends Component {
     };
 
     state = {
-        open: false
+        open: false,
+        name: '',
+        phone: '',
+        address: ''
     };
 
     toggle = (e) => {
+        this.state.open && this.props.hideInvitationAlert();
         this.setState({
             open: !this.state.open,
-            name: '',
-            phone: '',
-            address: ''
+
         })
     };
+
+    clear = () => {
+        this.setState({
+            open: false,
+            name: '',
+            phone: '',
+            address: ''})
+    }
 
     _onSubmit = (e) => {
         e.preventDefault()
@@ -49,16 +60,25 @@ class Invite extends Component {
         return list.length ? <ul>{list}</ul> : ''
     }
 
+    renderInputs() {
+        const {errors} = this.props;
+
+        return [{name: 'name', placeholder: 'имя'}, {name: 'phone', placeholder: 'телефон'}, {name:'address', placeholder: 'адрес дома'}].map((item) => {
+            const {name, placeholder} = item;
+            return <div key={name}>
+                <input className={this.setClass(name)} type="text" name={name} placeholder={placeholder} value={this.state[name]} onChange={this._onChange} />
+                {errors[name] ? <div className="input-error-text">{errors[name]}</div> : ''}
+            </div>
+        })
+    }
+
     renderForm() {
         if (!this.state.open) {
             return null;
         }
         return (
             <form className="invite-form" onSubmit={this._onSubmit}>
-                {this.renderErrors()}
-                <input className={this.setClass('name')} type="text" name="name" placeholder="имя" value={this.state.name} onChange={this._onChange} />
-                <input className={this.setClass('phone')} type="text" name="phone" placeholder="телефон" value={this.state.phone} onChange={this._onChange} />
-                <input className={this.setClass('address')} type="text" name="address" placeholder="адрес дома" value={this.state.address} onChange={this._onChange} />
+                {this.renderInputs()}
                 <div className="submit-wrap">
                     {this.props.sending ? <Loader /> : ''}
                     <input className="button" type="submit" value="Пригласить" disabled={this.props.sending}/>
@@ -67,9 +87,11 @@ class Invite extends Component {
         );
     }
 
-
-
     render() {
+        if (this.props.alert) {
+            return <div>{this.props.alert}</div>
+        }
+
         const modifier = `invite-form_wrap ${this.props.toggleable ? '-overflow' : ''}`;
 
         return (
@@ -83,13 +105,24 @@ class Invite extends Component {
             </div>
         );
     }
+
+    componentWillReceiveProps(nextProps) {
+        const {clear} = this
+        if (nextProps.alert) {
+            setTimeout(() => {
+                clear();
+                nextProps.hideInvitationAlert()
+            }, 3000)
+        }
+    }
 }
 
 export default connect(
     s => ({
         sending: s.invitation.get('sending'),
         fail: s.invitation.get('fail'),
-        errors: s.invitation.get('errors')
+        errors: s.invitation.get('errors'),
+        alert: s.invitation.get('alert'),
     }),
-    {inviteRsu}
+    {inviteRsu, hideInvitationAlert}
 )(Invite)

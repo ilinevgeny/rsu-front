@@ -1,4 +1,4 @@
-import { loadHouses, setHousesList, setSearchString, loadHouseItem, setHouseItem, sendingInvitation, setInviteFail } from '../AC/housesAC';
+import { loadHouses, setHousesList, setSearchString, loadHouseItem, setHouseItem, sendingInvitation, setInviteFail, sendInvitation } from '../AC/housesAC';
 import axios from 'axios'
 import { API_GET_HOUSES, API_GET_HOUSE_INFO, API_SEND_INVITATION } from '../../../config/ENV';
 
@@ -32,7 +32,7 @@ export function inviteRsu(params = {}) {
             if (res.data.code === '499') {
                 return dispatch(setInviteFail(res.data.result));
             }
-            return dispatch(setInvitation(res.data.result));
+            return dispatch(sendInvitation(res.data.result));
         });
     }
 }
