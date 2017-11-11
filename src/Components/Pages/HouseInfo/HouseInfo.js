@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import PageComponent from '../../App/PageComponent';
 import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
@@ -9,6 +10,18 @@ import BillsTable from './BillsTable';
 import {houseLoader} from '../../../Reducers/Requests/housesRequest'
 
 class HouseInfo extends PageComponent {
+    static propTypes = {
+        curYear: PropTypes.string,
+        curMonth: PropTypes.string,
+        transactions: PropTypes.array,
+        debitDiagram: PropTypes.object,
+        creditDiagram: PropTypes.object
+        // loading: PropTypes.bool.isRequired,
+        // loaded: PropTypes.bool.isRequired,
+        // listLoader: PropTypes.func.isRequired,
+        // search: PropTypes.string,
+    };
+
     setHouseTitle(props) {
         if (props.info) {
             this.setTitle(props.route.title + ' | ' + props.info.address);
@@ -28,9 +41,11 @@ class HouseInfo extends PageComponent {
     }
 
     render() {
-        if (this.props.info === null) {
+        const {curMonth, curYear, transactions, info, creditDiagram, debitDiagram} = this.props
+        if (info === null) {
             return '';
         }
+
         return (
             <section className="content">
                 <div className="header">
@@ -66,17 +81,43 @@ class HouseInfo extends PageComponent {
                         <GraphWrap />
                     </div>
                 </div>
-                <BillsTable billsList={[]}/>    
+                <BillsTable billsList={transactions} creditDiagram={creditDiagram} debitDiagram={debitDiagram}/>
             </section>
         );
     }
 }
 
+function stateToProps(s, {match}) {
+    let curYear = null;
+    let curMonth = null;
+    let transactions = [];
+    let debitDiagram = null;
+    let creditDiagram = null;
+
+    const id = match.params.id
+    const info = s.houses.getIn(['infoDict', id]) || null;
+
+    if (info) {
+        curYear = info.curYear;
+        curMonth = info.curMonth;
+        transactions = info.bills.getIn([curYear, curMonth, 'transactions']) || []
+        debitDiagram = info.bills.getIn([curYear, curMonth, 'debitDiagram'])
+        creditDiagram = info.bills.getIn([curYear, curMonth, 'creditDiagram'])
+    }
+
+    return {
+        id,
+        info,
+        loading: s.houses.get('loading'),
+        curYear,
+        curMonth,
+        transactions,
+        debitDiagram,
+        creditDiagram,
+    }
+}
+
 export default connect(
-    (s, {match}) => ({
-            id: match.params.id,
-            info: s.houses.getIn(['infoDict', match.params.id]) || null,
-            loading: s.houses.get('loading')
-    }),
+    stateToProps,
     {houseLoader}
 )( PageLayout(LeftAside, HouseInfo) );

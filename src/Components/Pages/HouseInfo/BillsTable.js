@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { numberFormat, mapToArr } from '../../../Utils/helper';
-
+import moment from 'moment';
+import { numberFormat } from '../../../Utils/helper';
 
 export default class BillsTable extends Component {
     static propTypes = {
         billsList: PropTypes.array.isRequired,
+        debitDiagram: PropTypes.object,
+        creditDiagram: PropTypes.object
     };
 
     tabs = [
@@ -15,19 +16,20 @@ export default class BillsTable extends Component {
         {id: 'out', title: 'Расходы'},
     ].reverse();
 
-    items = [
-        {id: 0, 'date': 'DD.MM.YY', type: 'debit', sum: 1000, counterparty: 'Name Name', purpose: 'Purpose of payment'},
-        {id: 1, 'date': 'DD.MM.YY', type: 'credit', sum: 1000000, counterparty: 'Name Name', purpose: 'Purpose of payment'},
-        {id: 2, 'date': 'DD.MM.YY', type: 'debit', sum: 100000000, counterparty: 'Name Name', purpose: 'Purpose of payment'},
-        {id: 3, 'date': 'DD.MM.YY', type: 'credit', sum: 1000, counterparty: 'Name Name', purpose: 'Purpose of payment'}
-    ]
-
     state = {
         toggle: 'all',
     }
 
     toggle = (name) => (e) => {
         this.setState({toggle: name})
+    }
+
+    percent(sum, max) {
+        return sum * 100 / (max || sum);
+    }
+
+    diagramToArr(diagram, max) {
+        return diagram.map((sum, category) => ({category, sum, percent: this.percent(sum, max)})).valueSeq().toArray();
     }
 
     renderTabs(item) {
@@ -47,75 +49,49 @@ export default class BillsTable extends Component {
                 <div className="bills-list_item -cont">Контрагент</div>
                 <div className="bills-list_item -desc">Назначение платежа</div>
             </div>
-            { this.items.map((item) => this.renderAllContentItems(item)) }
+            { this.props.billsList.map((item) => this.renderAllContentItems(item)) }
         </div>
     }
 
     renderAllContentItems(item) {
-        const sumModifier = `bills-list_item -sum -sum-font ${item.type === 'debit' ? '-debit -color_green' : '-credit -color_orange'}`;
-
+        const sumModifier = `bills-list_item -sum -sum-font ${item.type === 'debit' ? '-debit -color_orange' : '-credit -color_green'}`;
         return <div key={item.id} className="bills-list_row">
-                <div className="bills-list_item -date">{item.date}</div>
+                <div className="bills-list_item -date">{moment(item.datetime).format('DD.MM.YY')}</div>
                 <div className={sumModifier}>{numberFormat(item.sum, 0, '', ' ')}</div>
-                <div className="bills-list_item -cont">{item.counterparty}</div>
+                <div className="bills-list_item -cont">{item.category}</div>
                 <div className="bills-list_item -desc">{item.purpose}</div>
             </div>
     }
 
     renderInContent() {
-        if (this.state.toggle !== 'in') {
+        if (this.state.toggle !== 'in' || !this.props.creditDiagram) {
             return '';
         }
+
+        const max = this.props.creditDiagram.max();
+
         return <div className="diagram">
-            <div className="diagram_item">
-                <div className="diagram_item-title">Содержание придомовой территории</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_green" style={{width: '100%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(100000, 0, '', ' ')}</div>
-                </div>
-            </div>
-            <div className="diagram_item">
-                <div className="diagram_item-title">Гвс</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_green" style={{width: '10%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(10000, 0, '', ' ')}</div>
-                </div>
-            </div>
-            <div className="diagram_item">
-                <div className="diagram_item-title">Другое</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_green" style={{width: '33%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(33000, 0, '', ' ')}</div>
-                </div>
-            </div>
+            {this.diagramToArr(this.props.creditDiagram, max).map(item => this.renderInOutItem(item, '-background-color_green'))}
         </div>
     }
 
     renderOutContent() {
-        if (this.state.toggle !== 'out') {
+        if (this.state.toggle !== 'out'  || !this.props.debitDiagram) {
             return '';
         }
+        const max = this.props.debitDiagram.max();
+
         return <div className="diagram">
-            <div className="diagram_item">
-                <div className="diagram_item-title">Содержание придомовой территории</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_orange" style={{width: '100%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(100000, 0, '', ' ')}</div>
-                </div>
-            </div>
-            <div className="diagram_item">
-                <div className="diagram_item-title">Гвс</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_orange" style={{width: '44%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(44000, 0, '', ' ')}</div>
-                </div>
-            </div>
-            <div className="diagram_item">
-                <div className="diagram_item-title">Другое</div>
-                <div className="diagram_item-data">
-                    <div className="diagram_item-progress-bar -background-color_orange" style={{width: '22%'}} />
-                    <div className="diagram_item-sum -sum-font">{numberFormat(22000, 0, '', ' ')}</div>
-                </div>
+            {this.diagramToArr(this.props.debitDiagram, max).map(item => this.renderInOutItem(item, '-background-color_orange'))}
+        </div>
+    }
+
+    renderInOutItem(item, modifier) {
+        return <div key={item.category} className="diagram_item">
+            <div className="diagram_item-title">{item.category}</div>
+            <div className="diagram_item-data">
+                <div className={`diagram_item-progress-bar ${modifier}`} style={{width: numberFormat(item.percent, 2, '.') + '%'}} />
+                <div className="diagram_item-sum -sum-font">{numberFormat(item.sum, 0, '', ' ')}</div>
             </div>
         </div>
     }

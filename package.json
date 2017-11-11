@@ -27,6 +27,7 @@
     "express": "^4.16.1",
     "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.19.1",
     "morgan": "^1.9.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

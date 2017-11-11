@@ -287,6 +287,7 @@ body
 
 .bills-table_wrap
   margin-top 55px
+  margin-bottom 30px
 
 .bills-table_tabs
   display flex
@@ -351,12 +352,11 @@ body
 
 .bills-list_row
   display flex
-  height 40px
-  line-height 40px
+  //line-height 40px
   border-top 1px solid $color-grey-light
 
 .bills-list_item
-  padding 0 16px
+  padding 12px 16px
   font-size 12px
   &.-date
     min-width 60px
@@ -368,9 +368,12 @@ body
   &.-cont
     min-width 160px
   &.-debit:before
-    content '+ '
-  &.-credit:before
     content '- '
+  &.-credit:before
+    content '+ '
+
+.bills-list_header .bills-list_item
+  padding 0 16px
 
 .diagram
   margin 25px 30px
