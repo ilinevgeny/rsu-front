@@ -1,4 +1,4 @@
-import {LOAD_HOUSE_ITEM, LOAD_HOUSES_LIST, SET_SEARCH_STRING, SET_HOUSE_ITEM, START, SUCCESS, FAIL, SENDING_INVITATION, HIDE_INVITATION_ALERT} from '../../CONSTANTS';
+import {LOAD_HOUSE_ITEM, LOAD_HOUSES_LIST, SET_SEARCH_STRING, SET_HOUSE_ITEM, START, SUCCESS, FAIL, SENDING_INVITATION, HIDE_INVITATION_ALERT, CHANGE_DATE, CHANGE_DATE_DAYS} from '../../CONSTANTS';
 
 export const loadHouses = () => ({type: LOAD_HOUSES_LIST + START});
 export const loadHouseItem = () => ({type: LOAD_HOUSE_ITEM + START});
@@ -34,3 +34,13 @@ export const sendInvitation = payload => ({
 export const hideInvitationAlert = () => ({
     type: HIDE_INVITATION_ALERT
 });
+
+export const changeDate = (id, year, month) => ({
+    type: CHANGE_DATE,
+    payload: {id, year, month},
+});
+
+export const changeDateAndBills = (days, id, year, month) => ({
+    type: CHANGE_DATE_DAYS,
+    payload: {days, id, year, month}
+})

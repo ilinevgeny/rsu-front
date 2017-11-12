@@ -1,27 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import PageComponent from '../../App/PageComponent';
 import PageLayout from "../../Decorators/PageLayout";
 import LeftAside from '../Aside/LeftAside';
 import InviteForm from '../../Partials/InviteForm';
 import GraphWrap from './GraphWrap';
 import BillsTable from './BillsTable';
-import {houseLoader} from '../../../Reducers/Requests/housesRequest'
+import {houseLoader, loadMonth} from '../../../Reducers/Requests/housesRequest'
 
 class HouseInfo extends PageComponent {
     static propTypes = {
+        id: PropTypes.string,
         curYear: PropTypes.string,
         curMonth: PropTypes.string,
         transactions: PropTypes.array,
         debitDiagram: PropTypes.object,
         creditDiagram: PropTypes.object,
         graph: PropTypes.object
-        // loading: PropTypes.bool.isRequired,
-        // loaded: PropTypes.bool.isRequired,
-        // listLoader: PropTypes.func.isRequired,
-        // search: PropTypes.string,
     };
+
+    yearChange = (e) => {
+        const selectedYear = e.target.value;
+        let selectedMonth = this.props.curMonth;
+
+        if (!this.props.info.getIn(['bills', selectedYear, selectedMonth])) {
+            selectedMonth = this.props.info.getIn(['bills', selectedYear]).keySeq().toArray()[0];
+        }
+        this.props.loadMonth(this.props.id, selectedYear, selectedMonth);
+    }
+
+    monthChange = (e) => {
+        this.props.loadMonth(this.props.id, this.props.curYear, e.target.value);
+    }
 
     setHouseTitle(props) {
         if (props.info) {
@@ -57,23 +69,16 @@ class HouseInfo extends PageComponent {
                 </div>
                 <div className="house-info-wrap">
                     <div className="house-info">
-                        <div className="house-info_text -gothic-text">{this.props.info.address}</div>
-                        <div className="house-info_image"><img width='100%' src={this.props.info.img.front} /></div>
+                        <div className="house-info_text -gothic-text">{this.props.info.get('address')}</div>
+                        <div className="house-info_image"><img width='100%' src={this.props.info.get('img').front} /></div>
                     </div>
                     <div className="house-stat">
                         <div className="house-stat_select-bar">
-                            <select className="input -select -inline">
-                                <option value="1">Январь</option>
-                                <option value="2">Февраль</option>
-                                <option value="3">Март</option>
-                                <option value="4">Апрель</option>
+                            <select className="input -select -inline" name="month" onChange={this.monthChange}>
+                                {info.getIn(['bills', curYear]).keySeq().toArray().map(value => <option key={value} value={value}>{moment(value, "MM").locale("ru_RU").format("MMMM")}</option>)}
                             </select>
-                            <select className="input -select -inline">
-                                <option value="2017">2017&nbsp;&nbsp;</option>
-                                <option value="2016">2016&nbsp;&nbsp;</option>
-                                <option value="2015">2015&nbsp;&nbsp;</option>
-                                <option value="2014">2014&nbsp;&nbsp;</option>
-                                <option value="2013">2013&nbsp;&nbsp;</option>
+                            <select className="input -select -inline" name="year" onChange={this.yearChange}>
+                                {info.get('bills').keySeq().toArray().map(value => <option key={value} value={value}>{value}&nbsp;&nbsp;</option>)}
                             </select>
                         </div>
                         <div className="house-stat_notice -color_grey">
@@ -101,12 +106,14 @@ function stateToProps(s, {match}) {
     const info = s.houses.getIn(['infoDict', id]) || null;
 
     if (info) {
-        curYear = info.curYear;
-        curMonth = info.curMonth;
-        transactions = info.bills.getIn([curYear, curMonth, 'transactions']) || []
-        debitDiagram = info.bills.getIn([curYear, curMonth, 'debitDiagram'])
-        creditDiagram = info.bills.getIn([curYear, curMonth, 'creditDiagram'])
-        graph = info.bills.getIn([curYear, curMonth, 'graph'])
+        console.log('data');
+        curYear = info.get('curYear');
+        curMonth = info.get('curMonth');
+
+        transactions = info.getIn(['bills', curYear, curMonth, 'transactions']) || []
+        debitDiagram = info.getIn(['bills', curYear, curMonth, 'debitDiagram'])
+        creditDiagram = info.getIn(['bills', curYear, curMonth, 'creditDiagram'])
+        graph = info.getIn(['bills', curYear, curMonth, 'graph'])
     }
 
     return {
@@ -125,5 +132,5 @@ function stateToProps(s, {match}) {
 
 export default connect(
     stateToProps,
-    {houseLoader}
+    {houseLoader, loadMonth}
 )( PageLayout(LeftAside, HouseInfo) );

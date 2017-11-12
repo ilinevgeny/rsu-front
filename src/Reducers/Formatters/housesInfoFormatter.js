@@ -1,7 +1,7 @@
 import {Map, OrderedMap, List} from 'immutable';
 
 
-function getDaysData(days) {
+export const getDaysData = function(days) {
     let transactions = [];
     let creditDiagram = new OrderedMap({});
     let debitDiagram = new OrderedMap({});
@@ -13,6 +13,9 @@ function getDaysData(days) {
     });
     let sums = new List([]);
     let credit = 0, debit = 0, saldo = 0;
+
+    console.log(days);
+
 
     if (days) {
         for (let i in days) {
@@ -42,7 +45,7 @@ function getDaysData(days) {
                 points.debit = points.debit.set('0', days[i]['saldo_in'])
             }
 
-            sums = sums.push(dayCredit).push(dayDebit).push(days[i]['saldo_out'])
+            sums = sums.push(dayCredit).push(dayDebit).push(parseFloat(days[i]['saldo_out']))
 
             credit += dayCredit;
             debit  += dayDebit;

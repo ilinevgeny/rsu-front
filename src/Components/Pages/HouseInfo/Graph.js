@@ -14,6 +14,8 @@ export default class Graph extends Component {
 
 
     getX(point, xScale) {
+
+
         return numberFormat(parseFloat(point) * xScale, 2, '.') + '%';
     }
 
@@ -29,6 +31,8 @@ export default class Graph extends Component {
 
         const xScale = 100 / daysInMouth;
         const yScale = 100 / sums.max();
+
+        console.log(sums, sums.max(), xScale, yScale);
 
         return <g>
             {toggleObj.saldo ? <g className="grid-line -sep -blue">{this.renderLine(saldo, xScale, yScale)}</g> : ''}
