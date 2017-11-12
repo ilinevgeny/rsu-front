@@ -1,7 +1,7 @@
 import {Record} from 'immutable'
 
 export const LegendRecord = Record({
-    title: '',
     id: '',
+    title: '',
     sum: 0,
 });

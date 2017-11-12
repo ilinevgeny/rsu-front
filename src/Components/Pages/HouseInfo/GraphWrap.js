@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { mapToArr } from '../../../Utils/helper';
-import { LegendRecord } from '../../../Reducers/Entities';
 import Graph from './Graph'
 import GraphLegend from './GraphLegend';
 
-
-class GraphWrap extends Component {
+export default class GraphWrap extends Component {
     static propTypes = {
-        legendList: PropTypes.array.isRequired,
+        curMonth: PropTypes.string,
+        curYear: PropTypes.string,
+        graph: PropTypes.object
     };
 
     modifiers = {
-        debit: ' -color_green ',
-        credit: ' -color_orange',
+        debit: ' -color_orange',
+        credit: ' -color_green',
         saldo: ' -color_blue'
     }
 
     constructor(props) {
         super(props);
         this.state = {};
-        props.legendList.forEach((item) => (this.state[item.id] = true));
+        props.graph.legend.forEach((item) => (this.state[item.get('id')] = true));
     }
 
     toggle = (name) => (e) => {
@@ -33,15 +31,10 @@ class GraphWrap extends Component {
     render() {
         return (
             <div className="house-stat_graph-wrap">
-                <Graph />
-                <GraphLegend list={this.props.legendList} toggleObj={this.state} toggle={this.toggle} modifiers={this.modifiers}/>
+                <Graph graph={this.props.graph} curMonth={this.props.curMonth} curYear={this.props.curYear} modifiers={this.modifiers} toggleObj={this.state} />
+                <GraphLegend list={this.props.graph.legend} toggleObj={this.state} toggle={this.toggle} modifiers={this.modifiers} />
             </div>
         );
     }
 }
 
-export default connect(
-    (s) => ({
-        legendList: mapToArr(s.houseInfo.get('legendList'), LegendRecord)
-    })
-)(GraphWrap);

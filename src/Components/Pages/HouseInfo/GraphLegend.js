@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { numberFormat } from '../../../Utils/helper';
+import { LegendRecord } from '../../../Reducers/Entities';
 
 export default class GraphLegend extends Component {
     static propTypes = {
-        list: PropTypes.array.isRequired,
+        list: PropTypes.object.isRequired,
         toggleObj: PropTypes.object.isRequired,
         toggle: PropTypes.func.isRequired,
         modifiers: PropTypes.object.isRequired,
@@ -27,12 +28,9 @@ export default class GraphLegend extends Component {
     }
 
     render() {
-
-
         return (
             <ul className="graph-legend" data-update="Актуально на 01.11.2017">
-                {this.props.list.map((item) => this.renderItem(item)
-                )}
+                {this.props.list.map((item) => this.renderItem(new LegendRecord(item))).valueSeq().toArray()}
             </ul>
         );
     }

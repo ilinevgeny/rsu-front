@@ -15,7 +15,8 @@ class HouseInfo extends PageComponent {
         curMonth: PropTypes.string,
         transactions: PropTypes.array,
         debitDiagram: PropTypes.object,
-        creditDiagram: PropTypes.object
+        creditDiagram: PropTypes.object,
+        graph: PropTypes.object
         // loading: PropTypes.bool.isRequired,
         // loaded: PropTypes.bool.isRequired,
         // listLoader: PropTypes.func.isRequired,
@@ -41,7 +42,7 @@ class HouseInfo extends PageComponent {
     }
 
     render() {
-        const {curMonth, curYear, transactions, info, creditDiagram, debitDiagram} = this.props
+        const {curMonth, curYear, transactions, info, creditDiagram, debitDiagram, graph} = this.props
         if (info === null) {
             return '';
         }
@@ -78,7 +79,7 @@ class HouseInfo extends PageComponent {
                         <div className="house-stat_notice -color_grey">
                             Поступления и расходы отобразятся за выбранный месяц
                         </div>
-                        <GraphWrap />
+                        <GraphWrap graph={graph} curMonth={curMonth} curYear={curYear}/>
                     </div>
                 </div>
                 <BillsTable billsList={transactions} creditDiagram={creditDiagram} debitDiagram={debitDiagram}/>
@@ -93,6 +94,8 @@ function stateToProps(s, {match}) {
     let transactions = [];
     let debitDiagram = null;
     let creditDiagram = null;
+    let points = null;
+    let graph = null;
 
     const id = match.params.id
     const info = s.houses.getIn(['infoDict', id]) || null;
@@ -103,6 +106,7 @@ function stateToProps(s, {match}) {
         transactions = info.bills.getIn([curYear, curMonth, 'transactions']) || []
         debitDiagram = info.bills.getIn([curYear, curMonth, 'debitDiagram'])
         creditDiagram = info.bills.getIn([curYear, curMonth, 'creditDiagram'])
+        graph = info.bills.getIn([curYear, curMonth, 'graph'])
     }
 
     return {
@@ -114,6 +118,8 @@ function stateToProps(s, {match}) {
         transactions,
         debitDiagram,
         creditDiagram,
+        points,
+        graph
     }
 }
 
