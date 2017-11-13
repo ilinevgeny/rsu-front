@@ -18,6 +18,12 @@ export default class BillsTable extends Component {
 
     state = {
         toggle: 'all',
+        accordion: null
+    }
+
+    toggleQuestion = (id) => (e) => {
+        e.preventDefault();
+        this.setState({accordion: id === this.state.accordion ? null : id})
     }
 
     toggle = (name) => (e) => {
@@ -55,12 +61,23 @@ export default class BillsTable extends Component {
 
     renderAllContentItems(item) {
         const sumModifier = `bills-list_item -sum -sum-font ${item.type === 'debit' ? '-debit -color_orange' : '-credit -color_green'}`;
-        return <div key={item.id} className="bills-list_row">
+        const id = this.state.accordion;
+
+        return <div key={item.id}>
+            <div className="bills-list_row">
                 <div className="bills-list_item -date">{moment(item.datetime).format('DD.MM.YY')}</div>
                 <div className={sumModifier}>{numberFormat(item.sum, 0, '', ' ')}</div>
                 <div className="bills-list_item -cont">{item.category}</div>
                 <div className="bills-list_item -desc">{item.purpose}</div>
+                <a className="bills-list_item -question" href="#" onClick={this.toggleQuestion(item.id)}>?</a>
             </div>
+            {id === item.id ? <form className="bills_list_question">
+                <input className="input -light-focus -w_180" type="text" name="name" placeholder="Имя" value="" />
+                <input className="input -light-focus -w_180" type="email" name="email" placeholder="E-mail" value="" />
+                <input className="input -light-focus -w_180" type="text" name="question" placeholder="Ваш вопрос" value="" />
+                <input type="submit" className="button" value="Отправить вопрос" />
+            </form> : ''}
+        </div>
     }
 
     renderInContent() {

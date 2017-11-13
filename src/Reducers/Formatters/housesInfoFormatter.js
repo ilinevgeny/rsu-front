@@ -14,9 +14,6 @@ export const getDaysData = function(days) {
     let sums = new List([]);
     let credit = 0, debit = 0, saldo = 0;
 
-    console.log(days);
-
-
     if (days) {
         for (let i in days) {
             let dayCredit = 0, dayDebit = 0;

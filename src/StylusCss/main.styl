@@ -165,6 +165,7 @@ body
   width 100%
   font-family "Century Gothic", sans-serif
   outline none
+  background-color transparent
   &.-light-focus:focus
     border-bottom: 1px solid $color-blue
   &.-select
@@ -176,6 +177,9 @@ body
   &.-error
     border-bottom: 1px solid $color-red
     color $color-red
+  &.-w_180
+    width 180px
+    min-width 180px
 
 .input-error-text
   color: $color-red
@@ -371,9 +375,35 @@ body
     content '- '
   &.-credit:before
     content '+ '
+  &.-question
+    display block
+    min-width 32px
+    font-family: Open Sans sans-serif;
+    font-size: 30px;
+    padding: 0;
+    font-weight: bold;
+    color $color-grey-light
+    text-decoration none
 
 .bills-list_header .bills-list_item
   padding 0 16px
+
+.bills_list_question
+  position relative
+  display flex
+  padding 10px
+  background-color $color-grey-background
+  justify-content space-between
+  &:before
+    content ''
+    position absolute
+    width 14px
+    height 14px
+    background-color $color-grey-background
+    top -7px
+    right 17px
+    transform rotate(45deg)
+
 
 .diagram
   margin 25px 30px
