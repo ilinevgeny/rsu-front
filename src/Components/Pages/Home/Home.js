@@ -93,12 +93,12 @@ class Home extends PageComponent {
 
 
 export default connect(
-    (s, route) => ({
+    (s, location) => ({
          housesList: s.houses.get('list'),
          loading: s.houses.get('loading'),
          loaded: s.houses.get('loaded'),
          search: s.houses.get('search'),
-         route
+         location
      }),
     {listLoader}
  )( PageLayout(LeftAside, Home, RightAside) );

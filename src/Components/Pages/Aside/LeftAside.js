@@ -11,7 +11,7 @@ class LeftAside extends Component {
     render() {
         return (
             <aside className="left-aside">
-                {this.props.route.location.pathname === '/' ? '' : <Link to='/' onClick={this._onClick}><div className="pointer-back" /></Link>}
+                {this.props.location.location.pathname === '/' ? '' : <Link to='/' onClick={this._onClick}><div className="pointer-back" /></Link>}
                 <Link to='/' onClick={this._onClick} className="logo_wrap">
                     <img className="logo" src="/img/logo.png" alt="RSU" />
                 </Link>

@@ -37,7 +37,7 @@ class HouseInfo extends PageComponent {
 
     setHouseTitle(props) {
         if (props.info) {
-            this.setTitle(props.route.title + ' | ' + props.info.address);
+            this.setTitle(props.route.title + ' | ' + props.info.get('address'));
         }
     }
 
@@ -93,7 +93,7 @@ class HouseInfo extends PageComponent {
     }
 }
 
-function stateToProps(s, route) {
+function stateToProps(s, location) {
     let curYear = null;
     let curMonth = null;
     let transactions = [];
@@ -102,7 +102,7 @@ function stateToProps(s, route) {
     let points = null;
     let graph = null;
 
-    const id = route.match.params.id
+    const id = location.match.params.id
     const info = s.houses.getIn(['infoDict', id]) || null;
 
     if (info) {
@@ -126,7 +126,7 @@ function stateToProps(s, route) {
         creditDiagram,
         points,
         graph,
-        route
+        location
     }
 }
 
