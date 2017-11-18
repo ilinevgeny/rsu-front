@@ -77,11 +77,11 @@ class Invite extends Component {
     }
 
     render() {
-        if (this.props.alert) {
-            return <div>{this.props.alert}</div>
-        }
+        const shadowModifier = `invite-block ${this.state.open || this.props.alert ? '-with-shadow' : ''}`;
 
-        const shadowModifier = `invite-block ${this.state.open ? '-with-shadow' : ''}`;
+        if (this.props.alert) {
+            return <div className={`${shadowModifier} -alert`}>{this.props.alert}</div>
+        }
 
         return (
             <div className={shadowModifier}>
