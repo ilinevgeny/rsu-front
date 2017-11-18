@@ -40,6 +40,11 @@ body
   margin-bottom 6px
   position relative
   z-index 10
+  max-height 53px
+
+.invite-block
+  &.-with-shadow
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
 
 .invite-wrap
   width 240px
@@ -107,9 +112,6 @@ body
   width 100%
   box-sizing border-box
   background-color $background-color
-
-.invite-form_wrap.-overflow
-  height 0
 
 .gallery_wrap
   margin-top 36px
@@ -391,7 +393,8 @@ body
 .bills_list_question
   position relative
   display flex
-  padding 10px
+  align-items center
+  padding 10px 16px
   background-color $color-grey-background
   justify-content space-between
   &:before

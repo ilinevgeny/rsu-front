@@ -8,7 +8,6 @@ import Loader from '../../Partials/Loader'
 
 class Invite extends Component {
     static propTypes = {
-        toggleable: PropTypes.bool,
         inviteRsu: PropTypes.func.isRequired
     };
 
@@ -50,16 +49,6 @@ class Invite extends Component {
         return `input -light-focus ${fail && errors[name] ? '-error' : ''}`;
     }
 
-    renderErrors() {
-        let list = [];
-
-        for (let i in this.props.errors) {
-            list.push(<li key={i}>{this.props.errors[i]}</li>);
-        }
-
-        return list.length ? <ul>{list}</ul> : ''
-    }
-
     renderInputs() {
         const {errors} = this.props;
 
@@ -92,14 +81,14 @@ class Invite extends Component {
             return <div>{this.props.alert}</div>
         }
 
-        const modifier = `invite-form_wrap ${this.props.toggleable ? '-overflow' : ''}`;
+        const shadowModifier = `invite-block ${this.state.open ? '-with-shadow' : ''}`;
 
         return (
-            <div>
+            <div className={shadowModifier}>
                 <div className="invite-button" onClick={this.toggle}>
                     Пригласить РСУ к себе в дом
                 </div>
-                <div className={modifier}>
+                <div className="invite-form_wrap">
                     {this.renderForm()}
                 </div>
             </div>

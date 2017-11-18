@@ -64,7 +64,7 @@ class HouseInfo extends PageComponent {
                 <div className="header">
                     <h1 className="title -content-padding">Узнайте все о состоянии счета вашего дома</h1>
                     <div className="invite-wrap">
-                        <InviteForm toggleable={true} />
+                        <InviteForm />
                     </div>
                 </div>
                 <div className="house-info-wrap">
@@ -93,7 +93,7 @@ class HouseInfo extends PageComponent {
     }
 }
 
-function stateToProps(s, {match}) {
+function stateToProps(s, route) {
     let curYear = null;
     let curMonth = null;
     let transactions = [];
@@ -102,11 +102,10 @@ function stateToProps(s, {match}) {
     let points = null;
     let graph = null;
 
-    const id = match.params.id
+    const id = route.match.params.id
     const info = s.houses.getIn(['infoDict', id]) || null;
 
     if (info) {
-        console.log('data');
         curYear = info.get('curYear');
         curMonth = info.get('curMonth');
 
@@ -126,7 +125,8 @@ function stateToProps(s, {match}) {
         debitDiagram,
         creditDiagram,
         points,
-        graph
+        graph,
+        route
     }
 }
 
