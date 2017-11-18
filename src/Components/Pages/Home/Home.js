@@ -8,6 +8,7 @@ import PageLayout  from '../../Decorators/PageLayout';
 import LeftAside from '../Aside/LeftAside';
 import RightAside from '../Aside/RightAside';
 import {listLoader} from '../../../Reducers/Requests/housesRequest'
+import {getParameterByName} from '../../../Utils/helper'
 
 class Home extends PageComponent {
     static propTypes = {
@@ -24,8 +25,8 @@ class Home extends PageComponent {
         super(props);
         this.state.search = props.search;
         if (this.isBrowser()) {
-            let url = new URL(location.href);
-            let search = url.searchParams.get("search");
+            let search = getParameterByName('search');
+
             if (search !== props.search) {
                 this.state.search = search || '';
             }

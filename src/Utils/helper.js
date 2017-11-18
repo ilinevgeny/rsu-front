@@ -39,6 +39,11 @@ export function numberFormat( number, decimals, dec_point, thousands_sep ) {
     return km + kw + kd;
 }
 
+export function getParameterByName(name) {
+    let match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 export function prepareParams(params) {
     let url = params[0];
     delete params[0];
