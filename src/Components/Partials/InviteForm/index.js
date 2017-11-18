@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {inviteRsu} from '../../../Reducers/Requests/housesRequest'
 import {hideInvitationAlert} from '../../../Reducers/AC/housesAC'
-import Loader from '../../Partials/Loader'
+import {Loader} from '../../Partials/Loader'
 
 
 class Invite extends Component {

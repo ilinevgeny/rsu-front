@@ -1,6 +1,6 @@
 import { loadHouses, setHousesList, setSearchString, loadHouseItem, setHouseItem, sendingInvitation, setInviteFail, sendInvitation, changeDate, changeDateAndBills } from '../AC/housesAC';
 import axios from 'axios'
-import { API_GET_HOUSES, API_GET_HOUSE_INFO, API_SEND_INVITATION, API_GET_MONTH_TRANSACTIONS } from '../../../config/ENV';
+import { API_GET_HOUSES, API_GET_HOUSE_INFO, API_SEND_INVITATION, API_GET_MONTH_TRANSACTIONS, API_SEND_QUESTION } from '../../../config/ENV';
 
 export function listLoader(params = {search: ''}) {
     return dispatch => {
@@ -48,4 +48,10 @@ export function loadMonth(houseId, year, month) {
         }
         return dispatch(changeDate(houseId, year, month));
     }
+}
+
+export function sendQuestion(id, name, email, q) {
+    return axios.get(API_SEND_QUESTION, {params:{id, name, email, q}}).then(res => {
+        return res.data;
+    });
 }

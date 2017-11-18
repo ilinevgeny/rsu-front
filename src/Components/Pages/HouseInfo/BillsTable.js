@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { numberFormat } from '../../../Utils/helper';
+import BillQuestionForm from './BillQuestionForm'
 
 export default class BillsTable extends Component {
     static propTypes = {
@@ -22,7 +23,7 @@ export default class BillsTable extends Component {
     }
 
     toggleQuestion = (id) => (e) => {
-        e.preventDefault();
+        e && e.preventDefault();
         this.setState({accordion: id === this.state.accordion ? null : id})
     }
 
@@ -71,12 +72,7 @@ export default class BillsTable extends Component {
                 <div className="bills-list_item -desc">{item.purpose}</div>
                 <a className="bills-list_item -question" href="#" onClick={this.toggleQuestion(item.id)}>?</a>
             </div>
-            {id === item.id ? <form className="bills_list_question">
-                <input className="input -light-focus -w_180" type="text" name="name" placeholder="Имя" value="" />
-                <input className="input -light-focus -w_180" type="email" name="email" placeholder="E-mail" value="" />
-                <input className="input -light-focus -w_180" type="text" name="question" placeholder="Ваш вопрос" value="" />
-                <input type="submit" className="button" value="Отправить вопрос" />
-            </form> : ''}
+            {id === item.id ? <BillQuestionForm transactionId={item.id} onClose={this.toggleQuestion(item.id)}/> : ''}
         </div>
     }
 

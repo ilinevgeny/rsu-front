@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PageComponent from '../../App/PageComponent';
-import Loader from '../../Partials/Loader'
+import {Loader} from '../../Partials/Loader'
 import PageLayout  from '../../Decorators/PageLayout';
 import LeftAside from '../Aside/LeftAside';
 import RightAside from '../Aside/RightAside';

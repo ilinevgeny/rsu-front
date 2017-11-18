@@ -416,7 +416,7 @@ body
 .bills_list_question
   position relative
   display flex
-  align-items center
+  align-items flex-start
   padding 10px 16px
   background-color $color-grey-background
   justify-content space-between
@@ -430,6 +430,21 @@ body
     right 17px
     transform rotate(45deg)
 
+.bills_list_question-item
+  &.-name
+    min-width 168px
+    padding-right 16px
+  &.-email
+    min-width 160px
+    padding 0 16px
+  &.-question
+    flex-grow 1
+    padding 0 16px
+  &.-button
+    min-width 200px
+    display flex
+    justify-content flex-end
+    align-items flex-start
 
 .diagram
   margin 25px 30px
