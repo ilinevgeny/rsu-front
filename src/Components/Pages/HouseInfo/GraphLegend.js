@@ -10,6 +10,7 @@ export default class GraphLegend extends Component {
         toggleObj: PropTypes.object.isRequired,
         toggle: PropTypes.func.isRequired,
         modifiers: PropTypes.object.isRequired,
+        actual: PropTypes.string
     };
 
     renderItem(item) {
@@ -29,7 +30,7 @@ export default class GraphLegend extends Component {
 
     render() {
         return (
-            <ul className="graph-legend" data-update="Актуально на 01.11.2017">
+            <ul className="graph-legend" data-update={`Актуально на ${this.props.actual}`}>
                 {this.props.list.map((item) => this.renderItem(new LegendRecord(item))).valueSeq().toArray()}
             </ul>
         );

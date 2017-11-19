@@ -5,6 +5,7 @@ import GraphLegend from './GraphLegend';
 
 export default class GraphWrap extends Component {
     static propTypes = {
+        actual: PropTypes.string,
         curMonth: PropTypes.string,
         curYear: PropTypes.string,
         graph: PropTypes.object
@@ -32,7 +33,7 @@ export default class GraphWrap extends Component {
         return (
             <div className="house-stat_graph-wrap">
                 <Graph graph={this.props.graph} curMonth={this.props.curMonth} curYear={this.props.curYear} modifiers={this.modifiers} toggleObj={this.state} />
-                <GraphLegend list={this.props.graph.legend} toggleObj={this.state} toggle={this.toggle} modifiers={this.modifiers} />
+                <GraphLegend list={this.props.graph.legend} toggleObj={this.state} toggle={this.toggle} modifiers={this.modifiers} actual={this.props.actual} />
             </div>
         );
     }

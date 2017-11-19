@@ -84,7 +84,7 @@ class HouseInfo extends PageComponent {
                         <div className="house-stat_notice -color_grey">
                             Поступления и расходы отобразятся за выбранный месяц
                         </div>
-                        <GraphWrap graph={graph} curMonth={curMonth} curYear={curYear}/>
+                        <GraphWrap graph={graph} curMonth={curMonth} curYear={curYear} actual={this.props.info.get('actual') || 'N/A'}/>
                     </div>
                 </div>
                 <BillsTable billsList={transactions} creditDiagram={creditDiagram} debitDiagram={debitDiagram}/>

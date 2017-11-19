@@ -68,7 +68,7 @@ export default class BillsTable extends Component {
             <div className="bills-list_row">
                 <div className="bills-list_item -date">{moment(item.datetime).format('DD.MM.YY')}</div>
                 <div className={sumModifier}>{numberFormat(item.sum, 0, '', ' ')}</div>
-                <div className="bills-list_item -cont">{item.category}</div>
+                <div className="bills-list_item -cont">{item.counterparty}</div>
                 <div className="bills-list_item -desc">{item.purpose}</div>
                 <a className="bills-list_item -question" href="#" onClick={this.toggleQuestion(item.id)}>?</a>
             </div>

@@ -50,9 +50,6 @@ export default (state = initialState, action = {}) => {
                 .setIn(['infoDict', action.payload.id, 'curYear'], action.payload.year)
                 .setIn(['infoDict', action.payload.id, 'curMonth'], action.payload.month);
         case CHANGE_DATE_DAYS:
-
-            console.log({ ...getDaysData( action.payload.days ) });
-
             return state
                 .setIn(['infoDict', action.payload.id, 'curYear'], action.payload.year)
                 .setIn(['infoDict', action.payload.id, 'curMonth'], action.payload.month)
