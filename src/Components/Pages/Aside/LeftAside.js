@@ -16,8 +16,8 @@ class LeftAside extends Component {
                     <img className="logo" src="/img/logo.png" alt="RSU" />
                 </Link>
                 <div className="contacts -gothic-text">
-                    <div>+7 (343) 384-00-61</div>
-                    <div>info@ukliga.tu</div>
+                    <div>+7 (499) 709-70-90</div>
+                    <div>rsu@rsu-7.com</div>
                 </div>
             </aside>
         );
