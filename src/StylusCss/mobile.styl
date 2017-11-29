@@ -1,4 +1,8 @@
-@media (max-width:600px)
+@media (min-width: 641px) and (max-width:960px)
+  .left-aside
+    position absolute
+
+@media (max-width:640px)
   .main_wrap
     flex-direction column
     margin 0
@@ -61,6 +65,96 @@
   .house-stat_graph-wrap
     flex-direction column
 
-@media (max-width:350px)
+@media (max-width:640px)
   .logo
     width 135px
+  .-content-padding
+    font-size 1rem
+  .house-info_text
+    text-align center
+  .house-stat
+    margin-left 1.5rem
+  .house-info
+    padding 1.2rem
+  .house-info_image
+    min-width 100%
+  .house-stat_graph-wrap
+    padding-right 1rem
+  .graph
+    width 100%
+  .grid
+    width 100%
+  .graph-legend
+    padding-top 2rem
+  .tabs_item-wrap
+    max-width 7rem
+  .tabs_item-wrap .tabs_item
+    font-size .5rem
+  .bills-list_header .bills-list_item
+    padding 0 .2rem
+  .bills-list_item
+    padding 1rem .2rem
+    font-size .55rem
+  .bills-list_item.-date
+    min-width 2.2rem
+    border-right 1px solid #ccc
+  .bills-list_item.-sum
+    text-align center
+    min-width 4rem
+    border-right 1px solid #ccc
+  .-sum-font
+    font-size .6rem !important
+  .bills-list_item.-cont
+    min-width 4rem
+    max-width 4rem
+    word-wrap break-word
+    border-right 1px solid #ccc
+  .bills-list_item.-desc
+    //max-width 9rem
+  .bills-list_item.-question
+    color: #fff;
+    background-color: #007bff;
+    border-radius: .25rem;
+    height: 34px;
+    border: 1px solid #007bff;
+    min-width: 34px !important;
+    margin-top .5rem;
+    margin-right .2rem;
+    box-shadow 1px 2px 3px #ccc;
+    text-align center
+    font-family Verdana
+    font-size 1.5rem
+  .bills_list_question
+    display block
+    padding .2rem 0.2rem;
+    font-size .6rem
+  .bills_list_question-item.-name
+    min-width 4rem
+    padding-right 0
+  .bills_list_question-item.-name input
+    font-size .7rem
+  .bills_list_question-item.-email
+    min-width 4rem
+    padding-right 0.1rem
+    padding-left  0.1rem
+  .bills_list_question-item.-email input
+    font-size .7rem
+  .bills_list_question-item.-question
+    padding-right 0.1rem
+    padding-left  0.1rem
+    padding-bottom .5rem
+  .bills_list_question-item.-question input
+    font-size .7rem
+  .diagram
+    margin 25px 0
+    font-size .6rem
+  .diagram_item-title
+    width: 4.5rem;
+    padding-left: 0.5rem
+    padding-bottom 1rem
+  .diagram_item-data
+    display block
+    max-width 13rem
+  .diagram_item-data .-sum-font
+    position relative
+    top: -1.25rem
