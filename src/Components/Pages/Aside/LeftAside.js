@@ -16,7 +16,7 @@ class LeftAside extends Component {
                     <img className="logo" src="/img/logo.png" alt="RSU" />
                 </Link>
                 <div className="contacts -gothic-text">
-                    <div>+7 (499) 709-70-90</div>
+                    <div>+7 (499) 709-709-0</div>
                     <div>rsu@rsu-7.com</div>
                 </div>
             </aside>

@@ -2,7 +2,7 @@ import {Record, Map} from 'immutable';
 import {LOAD_HOUSES_LIST, SET_SEARCH_STRING,
     LOAD_HOUSE_ITEM, SET_HOUSE_ITEM,
     CHANGE_DATE, CHANGE_DATE_DAYS,
-    START, SUCCESS} from '../CONSTANTS';
+    START, SUCCESS, NODATA} from '../CONSTANTS';
 
 import {formatLists, getCurrentDate, getDaysData} from './Formatters/housesInfoFormatter'
 
@@ -44,7 +44,12 @@ export default (state = initialState, action = {}) => {
             })
 
             return state.setIn(['infoDict', action.id], dataMap).set('loading', false);
-
+        case SET_HOUSE_ITEM + NODATA:
+            data = action.payload;
+            dataMap = new Map({
+                ...data
+            })
+            return state.setIn(['infoDict', action.id], dataMap).set('loading', false)
         case CHANGE_DATE:
             return state
                 .setIn(['infoDict', action.payload.id, 'curYear'], action.payload.year)

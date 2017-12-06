@@ -55,8 +55,26 @@ class HouseInfo extends PageComponent {
 
     render() {
         const {curMonth, curYear, transactions, info, creditDiagram, debitDiagram, graph} = this.props
-        if (info === null) {
+
+        if(info == null) {
             return '';
+        }
+        if (this.props.info.get('bills') == null) {
+            return (<section className="content">
+                <div className="header">
+                    <h1 className="title -content-padding">Узнайте все о состоянии счета вашего дома</h1>
+                    <div className="invite-wrap">
+                        <InviteForm />
+                    </div>
+                </div>
+                <div className="house-info-wrap">
+                    <div className="house-info">
+                        <div className="house-info_text -gothic-text">{this.props.info.get('address')}</div>
+                        <div className="house-info_image"><img width='100%' src={this.props.info.get('img').front} /></div>
+                    </div>
+                </div>
+                <div className="house-info-future">Данные по дому скоро будут обновлены</div>
+            </section>);
         }
 
         return (

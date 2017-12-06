@@ -1,4 +1,7 @@
-import {LOAD_HOUSE_ITEM, LOAD_HOUSES_LIST, SET_SEARCH_STRING, SET_HOUSE_ITEM, START, SUCCESS, FAIL, SENDING_INVITATION, HIDE_INVITATION_ALERT, CHANGE_DATE, CHANGE_DATE_DAYS} from '../../CONSTANTS';
+import {
+    LOAD_HOUSE_ITEM, LOAD_HOUSES_LIST, SET_SEARCH_STRING, SET_HOUSE_ITEM, START, SUCCESS, FAIL, SENDING_INVITATION,
+    HIDE_INVITATION_ALERT, CHANGE_DATE, CHANGE_DATE_DAYS, NODATA
+} from '../../CONSTANTS';
 
 export const loadHouses = () => ({type: LOAD_HOUSES_LIST + START});
 export const loadHouseItem = () => ({type: LOAD_HOUSE_ITEM + START});
@@ -15,6 +18,12 @@ export const setSearchString = payload => ({
 
 export const setHouseItem = (payload, id) => ({
     type: SET_HOUSE_ITEM + SUCCESS,
+    payload,
+    id
+});
+
+export const setHouseNoData = (payload, id) => ({
+    type: SET_HOUSE_ITEM + NODATA,
     payload,
     id
 });

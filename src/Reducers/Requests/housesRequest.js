@@ -1,4 +1,7 @@
-import { loadHouses, setHousesList, setSearchString, loadHouseItem, setHouseItem, sendingInvitation, setInviteFail, sendInvitation, changeDate, changeDateAndBills } from '../AC/housesAC';
+import {
+    loadHouses, setHousesList, setSearchString, loadHouseItem, setHouseItem, sendingInvitation, setInviteFail,
+    sendInvitation, changeDate, changeDateAndBills, setHouseNoData
+} from '../AC/housesAC';
 import axios from 'axios'
 import { API_GET_HOUSES, API_GET_HOUSE_INFO, API_SEND_INVITATION, API_GET_MONTH_TRANSACTIONS, API_SEND_QUESTION } from '../../../config/ENV';
 
@@ -20,6 +23,9 @@ export function houseLoader(params = {}) {
         }
 
         return axios.get(API_GET_HOUSE_INFO + params.id).then(res => {
+            if (res.data.result.bills == null) {
+                return dispatch(setHouseNoData(res.data.result, params.id));
+            }
             return dispatch(setHouseItem(res.data.result, params.id));
         });
     }
